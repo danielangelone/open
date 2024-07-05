@@ -47,7 +47,8 @@ export default {
       engines: [],
       error: '',
       showPopup: false,
-      theme: 'light'
+      theme: 'light',
+      errorMessage: '' // Adicione essa linha para armazenar a mensagem de erro
     }
   },
   computed: {
@@ -84,7 +85,8 @@ export default {
         this.engines = response.data.data;
         this.showPopup = true;
       } catch (error) {
-        this.error = 'Erro ao fazer a solicitação. Veja o log para mais detalhes.';
+        this.error = 'Erro ao fazer a solicitação.';
+        this.errorMessage = error.message; // Armazena a mensagem de erro
         console.error(error);
       }
     },
@@ -93,6 +95,7 @@ export default {
     }
   }
 }
+
 </script>
 
 <style scoped>
