@@ -1,37 +1,50 @@
 <template>
   <div :class="themeClass">
-    <div class="container mx-auto p-4">
-      <h2 class="text-2xl font-bold mb-4">Consulta de Engines da OpenAI</h2>
-      <form @submit.prevent="validateAndSubmit" class="bg-white p-4 rounded shadow-md">
-        <label for="api_key" class="block text-sm font-medium text-gray-700 mb-2">Digite sua chave de API:</label>
-        <input type="text" id="api_key" v-model="apiKey" required class="border p-2 w-full mb-4">
-        <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">Enviar</button>
-      </form>
-      <div v-if="engines.length > 0" class="mt-4">
-        <h3 class="text-xl font-bold mb-2">Engines disponíveis:</h3>
-        <ul class="list-disc pl-5">
-          <li v-for="engine in engines" :key="engine.id" class="mb-2">
-            {{ engine.id }}: {{ engine.object }}
-          </li>
-        </ul>
+    <div class="container mt-4">
+      <h2 class="text-center mb-4">Consulta de Engines da OpenAI</h2>
+      <div class="mb-3 me-3 flex-grow-1">
+        <label for="api_key" class="form-label">Digite sua chave de API:</label>
       </div>
-      <div v-if="error" class="mt-4 bg-red-100 text-red-700 p-2 rounded">
-        <p>{{ error }}</p>
+      <div class="d-flex justify-content-center">
+        <form @submit.prevent="validateAndSubmit" class="bg-light p-4 rounded shadow-sm d-flex align-items-center" style="width: 38em;">
+
+          <div class="d-flex w-100">
+
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="width: 38em;">
+              <input type="text" id="api_key" v-model="apiKey" required class="form-control">
+              <button type="submit" class="btn btn-primary btn-lg">
+                OK
+              </button>
+            </div>
+
+          </div>
+        </form>
+      </div>
+      <div v-if="error" class="mt-4 alert alert-danger d-flex align-items-center" role="alert">
+        <i class="bi bi-x-circle me-2"></i>
+        {{ error }}
       </div>
     </div>
 
-    <div v-if="showPopup" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center">
-      <div class="bg-white p-6 rounded shadow-lg">
-        <div class="flex items-center">
-          <img src="https://img.icons8.com/color/48/000000/api.png" alt="Icon" class="mr-4">
-          <h3 class="text-lg font-bold">Resultado da Consulta</h3>
+    <div v-if="showPopup" class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0, 0, 0, 0.5);">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Resultado da Consulta</h5>
+            <button type="button" class="btn-close" @click="closePopup"></button>
+          </div>
+          <div class="modal-body">
+            <ul class="list-group">
+              <li v-for="engine in engines" :key="engine.id" class="list-group-item">
+                {{ engine.id }}: {{ engine.object }}
+              </li>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" @click="closePopup">Fechar</button>
+          </div>
         </div>
-        <ul class="mt-4 list-disc pl-5">
-          <li v-for="engine in engines" :key="engine.id" class="mb-2">
-            {{ engine.id }}: {{ engine.object }}
-          </li>
-        </ul>
-        <button @click="closePopup" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded">Fechar</button>
       </div>
     </div>
   </div>
@@ -48,19 +61,19 @@ export default {
       error: '',
       showPopup: false,
       theme: 'light',
-      errorMessage: '' // Adicione essa linha para armazenar a mensagem de erro
+      errorMessage: ''
     }
   },
   computed: {
     themeClass() {
-      return this.theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-gray-100 text-black';
+      return this.theme === 'dark' ? 'bg-dark text-white' : 'bg-white text-dark';
     }
   },
   mounted() {
     this.setTheme();
     window.addEventListener('resize', this.setTheme);
   },
-  beforeDestroy() {
+  beforeUnmount() {
     window.removeEventListener('resize', this.setTheme);
   },
   methods: {
@@ -86,20 +99,34 @@ export default {
         this.showPopup = true;
       } catch (error) {
         this.error = 'Erro ao fazer a solicitação.';
-        this.errorMessage = error.message; // Armazena a mensagem de erro
+        this.errorMessage = error.message;
         console.error(error);
       }
     },
     closePopup() {
       this.showPopup = false;
+      location.reload();
     }
   }
 }
-
 </script>
 
 <style scoped>
 body {
   transition: background-color 0.5s, color 0.5s;
+}
+.btn-rounded {
+  border-radius: 50%;
+  background-color: black;
+  color: white;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+.btn-rounded i {
+  font-size: 1.2rem;
 }
 </style>
