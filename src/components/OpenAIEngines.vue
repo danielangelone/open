@@ -6,14 +6,14 @@
         <label for="api_key" class="form-label">Digite sua chave de API:</label>
       </div>
       <div class="d-flex justify-content-center">
-        <form @submit.prevent="validateAndSubmit" class="bg-light p-4 rounded shadow-sm d-flex align-items-center" style="width: 38em;">
+        <form @submit.prevent="validateAndSubmit" class="bg-light p-4 rounded shadow-sm d-flex align-items-center" style="width: 90%;">
 
           <div class="d-flex w-100">
 
 
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="width: 38em;">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="width: 100%;">
               <input type="text" id="api_key" v-model="apiKey" required class="form-control">
-              <button type="submit" class="btn btn-primary btn-lg">
+              <button type="submit" class="btn btn-primary btn-lg" style="width: 30%;">
                 OK
               </button>
             </div>
@@ -21,17 +21,18 @@
           </div>
         </form>
       </div>
-      <div v-if="error" class="mt-4 alert alert-danger d-flex align-items-center" role="alert">
-        <i class="bi bi-x-circle me-2"></i>
+      <div class="d-flex justify-content-center">
+      <div v-if="error" class="mt-4 alert alert-danger d-flex align-items-center justify-content-center" role="alert" style="width: 40%;">
+        <i class="bi-emoji-expressionless">&nbsp; </i>
         {{ error }}
       </div>
     </div>
-
+</div>
     <div v-if="showPopup" class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0, 0, 0, 0.5);">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Resultado da Consulta</h5>
+            <h5 class="modal-title"><i class="bi bi-emoji-smile-upside-down">&nbsp; </i>Resultado da Consulta</h5>
             <button type="button" class="btn-close" @click="closePopup"></button>
           </div>
           <div class="modal-body">
@@ -98,7 +99,7 @@ export default {
         this.engines = response.data.data;
         this.showPopup = true;
       } catch (error) {
-        this.error = 'Erro ao fazer a solicitação.';
+        this.error = ' Erro ao fazer a solicitação.';
         this.errorMessage = error.message;
         console.error(error);
       }
@@ -117,7 +118,7 @@ body {
 }
 .btn-rounded {
   border-radius: 50%;
-  background-color: black;
+  background-color: #474747;
   color: white;
   width: 40px;
   height: 40px;
