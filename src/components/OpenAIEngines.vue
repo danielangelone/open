@@ -127,7 +127,7 @@ body {
 }
 
 .theme-dark {
-  background-color: #454545;
+  background-color: #121212;
   color: white;
 }
 
@@ -137,7 +137,7 @@ body {
 }
 
 .bg-dark {
-  background-color: #343a40 !important;
+  background-color: #1e2022 !important;
   color: white !important;
 }
 
