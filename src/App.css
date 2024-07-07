@@ -101,3 +101,8 @@ input:checked + .slider {
 input:checked + .slider:before {
     transform: translateX(14px);
 }
+.text-decoration-none {
+    text-decoration: none;
+    color: #808080; /* Cinza */
+    font-size: 14px; /* Tamanho da fonte */
+}
