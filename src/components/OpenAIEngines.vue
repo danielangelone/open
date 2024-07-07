@@ -27,7 +27,7 @@
         <div v-if="error" class="mt-4 alert alert-danger d-flex align-items-center justify-content-center" role="alert" style="width: 40%;">
           <i class="bi-emoji-expressionless">&nbsp; </i>
           <div>
-            <p><strong>Texto digitado:</strong> {{ apiKey }}</p>
+            <p><strong>{{ apiKey }}</strong> </p>
             <p>Erro ao fazer a solicitação.</p>
             <pre>{{ errorDetails }}</pre>
           </div>
@@ -127,7 +127,7 @@ body {
 }
 
 .theme-dark {
-  background-color: #121212;
+  background-color: #454545;
   color: white;
 }
 
