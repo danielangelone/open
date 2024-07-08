@@ -54,10 +54,5 @@
     </div>
 
   </div>
-  <footer class="mt-4 text-center fixed-bottom">
-    <p style="font-size: 14px; color: #808080;">
-      Veja o código no
-      <a href="https://github.com/danielangelone/open" target="_blank" style="color: #808080; text-decoration: none;">GitHub</a>
-    </p>
-  </footer>
+  
 </template>
